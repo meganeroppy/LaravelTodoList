@@ -36,6 +36,16 @@ class TodoController extends Controller
     }
 
     /**
+     * ToDoの完了状態を切り替える
+     */
+    public function toggle(Todo $todo)
+    {
+        // is_done を反転させる（true→false、false→true）
+        $todo->update(['is_done' => !$todo->is_done]);
+        return redirect('/todo');
+    }
+
+    /**
      * ToDoを削除する
      */
     public function destroy(Todo $todo)

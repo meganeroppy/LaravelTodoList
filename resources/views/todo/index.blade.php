@@ -54,6 +54,10 @@
             cursor: pointer;
             color: #888;
         }
+        .todo-item { display: flex; align-items: center; gap: 10px; }
+        .todo-item input[type="checkbox"] { width: 18px; height: 18px; cursor: pointer; }
+        .todo-item .title { flex: 1; }
+        .todo-item.done .title { text-decoration: line-through; color: #aaa; }
         .empty { color: #aaa; }
     </style>
 </head>
@@ -79,9 +83,20 @@
         @else
             <ul>
                 @foreach ($todos as $todo)
-                    <li>
-                        <span>{{ $todo->title }}</span>
-                        {{-- 削除フォーム（DELETE メソッドは HTML 非対応のため @method で偽装） --}}
+                    <li class="todo-item {{ $todo->is_done ? 'done' : '' }}">
+                        {{-- 完了切り替えフォーム --}}
+                        <form method="POST" action="/todo/{{ $todo->id }}/toggle">
+                            @csrf
+                            @method('PATCH')
+                            <button type="submit" style="background:none;border:none;padding:0;cursor:pointer;">
+                                <input type="checkbox"
+                                       {{ $todo->is_done ? 'checked' : '' }}
+                                       onclick="this.closest('form').submit()"
+                                       style="pointer-events:auto;">
+                            </button>
+                        </form>
+                        <span class="title">{{ $todo->title }}</span>
+                        {{-- 削除フォーム --}}
                         <form method="POST" action="/todo/{{ $todo->id }}">
                             @csrf
                             @method('DELETE')
