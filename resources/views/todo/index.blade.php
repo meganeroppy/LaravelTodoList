@@ -1,5 +1,5 @@
 {{-- Copyright 2026 roppy --}}
-@extends('layouts.app')
+@extends('layouts.todo')
 
 @section('title', 'ToDoリスト')
 

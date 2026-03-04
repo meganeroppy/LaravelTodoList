@@ -1,16 +1,26 @@
 <?php
-// Copyright 2026 roppy
 
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\TodoController;
 
-// トップページ（Laravelデフォルト）
 Route::get('/', function () {
     return view('welcome');
 });
 
-// ToDoアプリのルート
-Route::get('/todo', [TodoController::class, 'index']);              // 一覧
-Route::post('/todo', [TodoController::class, 'store']);             // 新規保存
-Route::patch('/todo/{todo}/toggle', [TodoController::class, 'toggle']); // 完了切り替え
-Route::delete('/todo/{todo}', [TodoController::class, 'destroy']);  // 削除
+Route::get('/dashboard', function () {
+    return redirect('/todo');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    // ToDo関連のルート
+    Route::get('/todo', [App\Http\Controllers\TodoController::class, 'index']);
+    Route::post('/todo', [App\Http\Controllers\TodoController::class, 'store']);
+    Route::patch('/todo/{todo}/toggle', [App\Http\Controllers\TodoController::class, 'toggle']);
+    Route::delete('/todo/{todo}', [App\Http\Controllers\TodoController::class, 'destroy']);
+});
+
+require __DIR__.'/auth.php';

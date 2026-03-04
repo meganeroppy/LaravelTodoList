@@ -14,7 +14,8 @@ class TodoController extends Controller
      */
     public function index()
     {
-        $todos = Todo::with('category')->get();
+        // ログインユーザーのToDoだけを、カテゴリー情報付きで取得
+        $todos = auth()->user()->todos()->with('category')->latest()->get();
         $categories = Category::all();
         return view('todo.index', compact('todos', 'categories'));
     }
@@ -29,12 +30,12 @@ class TodoController extends Controller
             'category_id' => 'required|exists:categories,id',
         ]);
 
-        Todo::create([
+        // ログインユーザーに紐付けて作成
+        auth()->user()->todos()->create([
             'title' => $request->title,
             'category_id' => $request->category_id,
         ]);
 
-        // 保存後は一覧ページへリダイレクト
         return redirect('/todo');
     }
 
@@ -43,7 +44,11 @@ class TodoController extends Controller
      */
     public function toggle(Todo $todo)
     {
-        // is_done を反転させる（true→false、false→true）
+        // 所有権チェック
+        if ($todo->user_id !== auth()->id()) {
+            abort(403);
+        }
+
         $todo->update(['is_done' => !$todo->is_done]);
         return redirect('/todo');
     }
@@ -53,6 +58,11 @@ class TodoController extends Controller
      */
     public function destroy(Todo $todo)
     {
+        // 所有権チェック
+        if ($todo->user_id !== auth()->id()) {
+            abort(403);
+        }
+
         $todo->delete();
         return redirect('/todo');
     }

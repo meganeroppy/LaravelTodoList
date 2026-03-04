@@ -12,7 +12,16 @@ class Todo extends Model
         'title',
         'is_done',
         'category_id',
+        'user_id',
     ];
+
+    /**
+     * このToDoが属するユーザーを取得
+     */
+    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 
     /**
      * このToDoが属するカテゴリーを取得
