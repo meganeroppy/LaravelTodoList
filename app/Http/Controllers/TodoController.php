@@ -4,6 +4,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Todo;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class TodoController extends Controller
@@ -13,10 +14,9 @@ class TodoController extends Controller
      */
     public function index()
     {
-        // DBから全てのToDoを取得して新しい順に並べる
-        $todos = Todo::orderBy('created_at', 'desc')->get();
-
-        return view('todo.index', ['todos' => $todos]);
+        $todos = Todo::with('category')->get();
+        $categories = Category::all();
+        return view('todo.index', compact('todos', 'categories'));
     }
 
     /**
@@ -24,12 +24,15 @@ class TodoController extends Controller
      */
     public function store(Request $request)
     {
-        // バリデーション：titleは必須・最大255文字
         $request->validate([
             'title' => 'required|max:255',
+            'category_id' => 'required|exists:categories,id',
         ]);
 
-        Todo::create(['title' => $request->title]);
+        Todo::create([
+            'title' => $request->title,
+            'category_id' => $request->category_id,
+        ]);
 
         // 保存後は一覧ページへリダイレクト
         return redirect('/todo');

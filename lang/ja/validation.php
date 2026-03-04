@@ -7,5 +7,6 @@ return [
     ],
     'attributes' => [
         'title' => 'タイトル',
+        'category_id' => 'カテゴリー',
     ],
 ];
