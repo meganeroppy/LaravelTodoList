@@ -80,6 +80,18 @@
         border-bottom: 1px solid #eee;
     }
     ul li:last-child { border-bottom: none; }
+    .todo-actions { display: flex; gap: 8px; align-items: center; }
+    .edit-btn {
+        background-color: #3498db;
+        color: white;
+        padding: 4px 10px;
+        border-radius: 4px;
+        text-decoration: none;
+        font-size: 13px;
+        font-weight: bold;
+        transition: background 0.3s;
+    }
+    .edit-btn:hover { background-color: #2980b9; }
     .delete-btn {
         background: none;
         border: 1px solid #ccc;
@@ -87,11 +99,8 @@
         padding: 4px 10px;
         cursor: pointer;
         color: #888;
+        font-size: 13px;
     }
-    .todo-item { display: flex; align-items: center; gap: 10px; }
-    .todo-item input[type="checkbox"] { width: 18px; height: 18px; cursor: pointer; }
-    .todo-item .title { flex: 1; }
-    .todo-item.done .title { text-decoration: line-through; color: #aaa; }
     .empty { color: #aaa; }
 </style>
 @endpush
@@ -139,12 +148,17 @@
                         <span class="todo-text">{{ $todo->title }}</span>
                         <span class="category-badge">{{ $todo->category->name ?? 'なし' }}</span>
                     </div>
-                    {{-- 削除フォーム --}}
-                    <form method="POST" action="/todo/{{ $todo->id }}">
-                        @csrf
-                        @method('DELETE')
-                        <button class="delete-btn" type="submit">削除</button>
-                    </form>
+                    <div class="todo-actions">
+                        {{-- 編集リンク --}}
+                        <a href="/todo/{{ $todo->id }}/edit" class="edit-btn">編集</a>
+
+                        {{-- 削除フォーム --}}
+                        <form method="POST" action="/todo/{{ $todo->id }}" style="display: inline-block;">
+                            @csrf
+                            @method('DELETE')
+                            <button class="delete-btn" type="submit">削除</button>
+                        </form>
+                    </div>
                 </li>
             @endforeach
         </ul>

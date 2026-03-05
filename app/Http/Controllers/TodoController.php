@@ -66,4 +66,41 @@ class TodoController extends Controller
         $todo->delete();
         return redirect('/todo');
     }
+
+    /**
+     * ToDo編集画面を表示する
+     */
+    public function edit(Todo $todo)
+    {
+        // 所有権チェック
+        if ($todo->user_id !== auth()->id()) {
+            abort(403);
+        }
+
+        $categories = Category::all();
+        return view('todo.edit', compact('todo', 'categories'));
+    }
+
+    /**
+     * ToDoを更新する
+     */
+    public function update(Request $request, Todo $todo)
+    {
+        // 所有権チェック
+        if ($todo->user_id !== auth()->id()) {
+            abort(403);
+        }
+
+        $request->validate([
+            'title' => 'required|max:255',
+            'category_id' => 'required|exists:categories,id',
+        ]);
+
+        $todo->update([
+            'title' => $request->title,
+            'category_id' => $request->category_id,
+        ]);
+
+        return redirect('/todo');
+    }
 }

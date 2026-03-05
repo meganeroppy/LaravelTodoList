@@ -19,6 +19,8 @@ Route::middleware('auth')->group(function () {
     // ToDo関連のルート
     Route::get('/todo', [App\Http\Controllers\TodoController::class, 'index']);
     Route::post('/todo', [App\Http\Controllers\TodoController::class, 'store']);
+    Route::get('/todo/{todo}/edit', [App\Http\Controllers\TodoController::class, 'edit']);
+    Route::put('/todo/{todo}', [App\Http\Controllers\TodoController::class, 'update']);
     Route::patch('/todo/{todo}/toggle', [App\Http\Controllers\TodoController::class, 'toggle']);
     Route::delete('/todo/{todo}', [App\Http\Controllers\TodoController::class, 'destroy']);
 });
