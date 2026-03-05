@@ -43,5 +43,11 @@
                 {{ __('Log in') }}
             </x-primary-button>
         </div>
+
+        <div class="mt-4 text-center border-t border-gray-100 pt-4">
+            <a href="{{ route('register') }}" class="text-sm text-gray-600 hover:text-gray-900 underline">
+                アカウントをお持ちでない方はこちら（新規登録）
+            </a>
+        </div>
     </form>
 </x-guest-layout>
