@@ -103,4 +103,14 @@ class TodoController extends Controller
 
         return redirect('/todo');
     }
+
+    /**
+     * 完了済みのToDoを一括削除する
+     */
+    public function destroyCompleted()
+    {
+        auth()->user()->todos()->where('is_done', true)->delete();
+
+        return redirect('/todo');
+    }
 }

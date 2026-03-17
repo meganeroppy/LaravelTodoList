@@ -102,6 +102,19 @@
         font-size: 13px;
     }
     .empty { color: #aaa; }
+    .delete-completed-btn {
+        background-color: #f39c12;
+        color: white;
+        padding: 8px 16px;
+        border: none;
+        border-radius: 4px;
+        font-size: 14px;
+        cursor: pointer;
+        transition: background 0.3s;
+    }
+    .delete-completed-btn:hover {
+        background-color: #e67e22;
+    }
 </style>
 @endpush
 
@@ -131,6 +144,19 @@
             <p class="error-msg">{{ $message }}</p>
         @enderror
     </form>
+
+    {{-- 一括削除ボタン --}}
+    @if ($todos->where('is_done', true)->isNotEmpty())
+        <div style="text-align: right; margin-bottom: 20px;">
+            <form action="/todo/completed" method="POST" onsubmit="return confirm('完了済みのタスクをすべて削除してもよろしいですか？')">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="delete-completed-btn">
+                    完了済みをすべて削除
+                </button>
+            </form>
+        </div>
+    @endif
 
     {{-- ToDoの一覧 --}}
     @if ($todos->isEmpty())
