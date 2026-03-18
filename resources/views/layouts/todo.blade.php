@@ -14,6 +14,7 @@
         .logout-btn:hover { background: white; color: #e74c3c; }
         .container { max-width: 800px; margin: 0 auto; padding: 0 20px; }
         @stack('styles')
+        @livewireStyles
     </style>
 </head>
 <body>
@@ -37,5 +38,6 @@
     </div>
 
     @stack('scripts')
+    @livewireScripts
 </body>
 </html>
