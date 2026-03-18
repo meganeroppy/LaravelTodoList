@@ -20,13 +20,13 @@
             <button 
                 type="submit" 
                 wire:loading.attr="disabled"
-                style="padding: 10px 20px; background: #e74c3c; color: white; border: none; border-radius: 4px; cursor: pointer;"
+                style="padding: 10px 20px; background: #ff85a1; color: white; border: none; border-radius: 4px; cursor: pointer;"
             >
                 <span wire:loading.remove>追加</span>
                 <span wire:loading>...</span>
             </button>
-            @error('title') <div style="color: #e74c3c; font-size: 0.8rem; margin-top: 5px;">{{ $message }}</div> @enderror
-            @error('category_id') <div style="color: #e74c3c; font-size: 0.8rem; margin-top: 5px;">{{ $message }}</div> @enderror
+            @error('title') <div style="color: #ff85a1; font-size: 0.8rem; margin-top: 5px;">{{ $message }}</div> @enderror
+            @error('category_id') <div style="color: #ff85a1; font-size: 0.8rem; margin-top: 5px;">{{ $message }}</div> @enderror
         </form>
     </div>
 

@@ -37,7 +37,7 @@
     .save-btn {
         flex: 1;
         padding: 12px;
-        background-color: #2ecc71;
+        background-color: #ff85a1;
         color: white;
         border: none;
         border-radius: 6px;
@@ -54,9 +54,9 @@
         border-radius: 6px;
         font-weight: bold;
     }
-    .save-btn:hover { background-color: #27ae60; }
+    .save-btn:hover { background-color: #ff6b8e; }
     .cancel-btn:hover { background-color: #7f8c8d; }
-    .error-msg { color: #e74c3c; font-size: 0.85rem; margin-top: 5px; }
+    .error-msg { color: #ff85a1; font-size: 0.85rem; margin-top: 5px; }
 </style>
 @endpush
 
