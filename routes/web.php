@@ -3,6 +3,12 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
+Route::get('/setup', function () {
+    \Illuminate\Support\Facades\Artisan::call('migrate', ['--force' => true]);
+    \Illuminate\Support\Facades\Artisan::call('db:seed', ['--force' => true]);
+    return 'Database setup completed successfully! You can now go to <a href="/todo">/todo</a>';
+});
+
 Route::get('/', function () {
     return view('welcome');
 });
