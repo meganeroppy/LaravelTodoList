@@ -15,6 +15,9 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased">
+        <div class="bg-yellow-400 text-black text-center py-1 font-bold shadow-sm">
+            🚀 【検証環境 / STAGING】
+        </div>
         <div class="min-h-screen bg-gray-100">
             @include('layouts.navigation')
 
