@@ -1,4 +1,4 @@
-<div>
+<div wire:poll.5s>
     {{-- 入力フォーム --}}
     <div style="margin-bottom: 30px; text-align: center;">
         <form wire:submit.prevent="addTodo">
