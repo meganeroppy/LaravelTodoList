@@ -18,6 +18,12 @@
     </style>
 </head>
 <body>
+@if(config('app.env') === 'staging')
+    <div style="background-color: #fef3c7; color: #92400e; padding: 0.5rem; text-align: center; border-bottom: 1px solid #fcd34d; font-size: 0.875rem; font-weight: 500; position: relative; z-index: 1000;">
+        🚀【検証環境 / STAGING】これはテスト用サイトです。本番データには影響しません。
+    </div>
+@endif
+
     <header>
         <div class="header-content">
             <h1>Laravel ToDo</h1>
