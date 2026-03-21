@@ -6,7 +6,7 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\TodoApiController;
 
 // 公開ルート（ログイン）
-Route::post('/login', [AuthController.class, 'login']);
+Route::post('/login', [AuthController::class, 'login']);
 
 // 認証済みルート
 Route::middleware('auth:sanctum')->group(function () {

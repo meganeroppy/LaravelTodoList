@@ -29,9 +29,6 @@ class AuthController extends Controller
             ]);
         }
 
-        // 既存の全トークンを削除（1デバイスのみ許可する場合）
-        // $user->tokens()->delete();
-
         $token = $user->createToken($request->device_name)->plainTextToken;
 
         return response()->json([
