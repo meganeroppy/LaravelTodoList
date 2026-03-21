@@ -9,6 +9,8 @@ class TodoApiController extends Controller
 {
     /**
      * ログインユーザーのToDoリストを取得
+     * 
+     * @authenticated
      */
     public function index(Request $request)
     {

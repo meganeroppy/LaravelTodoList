@@ -39,6 +39,8 @@ class AuthController extends Controller
 
     /**
      * Unityからのログアウト処理
+     * 
+     * @authenticated
      */
     public function logout(Request $request)
     {
