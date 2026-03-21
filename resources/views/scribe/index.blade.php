@@ -26,7 +26,7 @@
             </style>
 
     <script>
-        var tryItOutBaseUrl = "http://localhost:8080";
+        var tryItOutBaseUrl = "{{ config("app.url") }}";
         var useCsrf = Boolean();
         var csrfUrl = "/sanctum/csrf-cookie";
     </script>
@@ -97,7 +97,7 @@
     <div class="content">
         <h1 id="introduction">Introduction</h1>
 <aside>
-    <strong>Base URL</strong>: <code>http://localhost:8080</code>
+    <strong>Base URL</strong>: <code>{{ config("app.url") }}</code>
 </aside>
 <pre><code>This documentation aims to provide all the information you need to work with our API.
 
@@ -124,7 +124,7 @@ You can switch the language used with the tabs at the top right (or from the nav
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8080/api/login" \
+    "{{ config("app.url") }}/api/login" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -137,7 +137,7 @@ You can switch the language used with the tabs at the top right (or from the nav
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8080/api/login"
+    "{{ config("app.url") }}/api/login"
 );
 
 const headers = {
@@ -284,14 +284,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8080/api/logout" \
+    "{{ config("app.url") }}/api/logout" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8080/api/logout"
+    "{{ config("app.url") }}/api/logout"
 );
 
 const headers = {

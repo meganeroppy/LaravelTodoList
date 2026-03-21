@@ -7,6 +7,9 @@ envsubst '${PORT}' < /etc/nginx/sites-available/default.template > /etc/nginx/si
 php artisan migrate --force
 php artisan db:seed --force
 
+# Generate API documentation
+php artisan scribe:generate
+
 # Start PHP-FPM in the background
 php-fpm -D
 
